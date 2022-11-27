@@ -6,9 +6,12 @@ import lombok.Value;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import com.github.javafaker.Faker;
+import org.jetbrains.annotations.NotNull;
 
-public class DataUser {
-    private DataUser() {
+public class DataHelper
+{
+    private DataHelper() {
     }
 
     @Value
@@ -18,11 +21,12 @@ public class DataUser {
     }
 
     public static AuthInfo getAuthInfo() {
-        return new AuthInfo("Evgeniya", "1q2w3e");
+        return new AuthInfo("Vasya", "qwerty123");
     }
 
-    public static AuthInfo getInvalidAuthInfo() {
-        return new AuthInfo("Evgeniya", "password");
+    public static @NotNull AuthInfo getInvalidAuthInfo() {
+        Faker faker = new Faker();
+        return new AuthInfo("vasya", faker.internet().password());
     }
 
     @Value

@@ -2,7 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
-import ru.netology.data.DataUser;
+import ru.netology.data.DataHelper;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -14,14 +14,14 @@ public class LoginPage {
     private SelenideElement notificationTitle = $("[data-test-id=error-notification] .notification__title");
     private SelenideElement notificationContent = $("[data-test-id=error-notification] .notification__content");
 
-    public VerificationPage validLogin(DataUser.AuthInfo info) {
+    public VerificationPage validLogin(DataHelper.AuthInfo info) {
         loginField.setValue(info.getLogin());
         passwordField.setValue(info.getPassword());
         loginButton.click();
         return new VerificationPage();
     }
 
-    public void invalidLogin(DataUser.AuthInfo info) {
+    public void invalidLogin(DataHelper.AuthInfo info) {
         loginField.setValue(info.getLogin());
         passwordField.setValue(info.getPassword());
         loginButton.click();
@@ -38,5 +38,9 @@ public class LoginPage {
         passwordField.sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
         passwordField.setValue(code);
         loginButton.click();
+    }
+    public void cleanLoginFields() {
+        loginField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+        passwordField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
     }
 }
