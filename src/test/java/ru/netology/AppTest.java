@@ -25,7 +25,6 @@ public class AppTest {
 
     @Test
     void shouldBlockedSystem() {
-        Faker faker = new Faker(new Locale("ru"));
         open("http://localhost:9999");
         var loginPage = new LoginPage();
         var authInfo = DataHelper.getInvalidAuthInfo();
